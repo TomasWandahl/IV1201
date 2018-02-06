@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use app\User;
 
 class HomeController extends Controller
 {
@@ -19,6 +20,11 @@ class HomeController extends Controller
     public function upload(Request $request) {
         $message = $request->input('message');
         return $message;
+    }
+
+    public function add(Request $request) {
+        $user = new User();
+        return $user->addition($request->input('x'),$request->input('y'));
     }
 
     /**

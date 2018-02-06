@@ -1,0 +1,16 @@
+# Copy ".env.example" and name the copy ".env"
+cp .env.example .env
+
+# Update the database info in the ".env" file
+
+# Install Laravel and its dependencies
+composer install
+
+# Update the project key
+php artisan key:generate
+
+# Create the database tables
+php artisan migrate
+
+# You can now start the development server
+php artisan serve

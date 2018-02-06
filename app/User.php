@@ -9,6 +9,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    function addition($x,$y){  
+        $result = $x + $y;
+        return view('result', ['result' => $result]);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

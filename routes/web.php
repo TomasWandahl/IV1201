@@ -14,16 +14,14 @@
 Route::get('/', function () {
     return view('home');
 });
-
+//redirects all /upload-routes to the HomeController, function = upload
 Route::get('/upload', 'HomeController@upload');
+//redirects all /add-routes to the HomeController, function = add
+Route::get('/add', 'HomeController@add');
 
 Route::get('/check', function(){
-    if(Auth::check()){
         return "You are logged in!";
-    } else {
-        return "Your are NOT logged in!";
-    }
-});
+})->middleware('auth');
 
 
 Auth::routes();
