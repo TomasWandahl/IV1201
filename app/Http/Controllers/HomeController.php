@@ -23,7 +23,13 @@ class HomeController extends Controller
     }
 
     public function add(Request $request) {
+
+
         $user = new User();
+        $user ->name = "Tompalompa";
+        $user ->email = "Email";
+        $user ->password = "Lösenord";
+        $user -> save();    
         return $user->addition($request->input('x'),$request->input('y'));
     }
 

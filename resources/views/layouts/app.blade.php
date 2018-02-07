@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="<?php echo asset('css/customcss.css')?>" type="text/css"> 
 </head>
 <body>
-    
     <div class="navbar">
         <li><img src="http://dogecoin.com/imgs/doge.png" alt=""></li>
         <li>This is such application, much global</li>
