@@ -10,8 +10,9 @@
 <body>
     <div class="navbar">
         <li><img src="http://dogecoin.com/imgs/doge.png" alt=""></li>
-        <li>This is such application, much global</li>
+        <li><a href="/globalproject/public">This is such application, much global</a></li>
         @if(Auth::check())
+        <li><a href="blabb">Upload Competence</a></li>
         <li class="li-right">You are logged in</li>
         @endif
         @if(Auth::guest())

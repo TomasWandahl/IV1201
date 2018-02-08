@@ -1,13 +1,16 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\User;
+use app\CompetenceProfile;
 
-class HomeController extends Controller
+class CompetenceController extends Controller
 {
-     /* Create a new controller instance.
+
+    /**
+     * Create a new controller instance.
      *
      * @return void
      */
@@ -16,15 +19,9 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-
-    public function upload(Request $request) {
-        $message = $request->input('message');
-        return $message;
-    }
-
-    public function add(Request $request) {
-        $user = new User();
-        return $user->addition($request->input('x'),$request->input('y'));
+    function uploadCompetence(Request $request) {
+        $cp = new CompetenceProfile();
+        $cp->uploadCompetence($request);
     }
 
     /**

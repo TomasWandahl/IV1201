@@ -10,13 +10,13 @@
   <h1>User name is: {{Auth::user()->name}}</h1>
   <p>Later on, there will be a form to apply to a job here, but right now all you can do is some simple math!</p>   
   <hr>       
-  <form action="add" method="get">
+  <form action="uploadCompetenceProfile" method="get">
         <div>
-          <label for="say"><strong>Please provide an integer!</strong></label>
-          <input name = "x" type="text" style ="width: 400px;padding: 12px 20px;margin: 8px 0;box-sizing: border-box;">
+          <label for="say"><strong>How many years of experience do you have?</strong></label>
+          <input name = "yearsOfExp" type="text" style ="width: 400px;padding: 12px 20px;margin: 8px 0;box-sizing: border-box;">
           <br>
-          <label for="say"><strong>Please provide another integer (or same)!<strong></label>
-          <input name = "y" type="text" style="height: 100px;width: 400px;margin: 8px 0;">
+          <label for="say"><strong>Please provide a small description of your competencies<strong></label>
+          <input name = "compDesc" type="text" style="height: 100px;width: 400px;margin: 8px 0;">
           <br>
           <br>
           
