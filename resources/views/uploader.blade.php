@@ -19,7 +19,9 @@
           <input name = "compDesc" type="text" style="height: 100px;width: 400px;margin: 8px 0;">
           <br>
           <br>
-          
+          I am available from <input name="from" type="date"> to <input name="to" type="date">
+          <br>
+          <br>
         </div>
         <div>
           <button style="padding: 12px 25px; font-weight: bold; border: none;background:#5DD39E;color:white;border-radius: 10px;">Get result</button>

@@ -1,10 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\CompetenceProfile;
+use App\CompetenceProfile;
+use Auth;
+
 
 class CompetenceController extends Controller
 {
@@ -21,7 +22,8 @@ class CompetenceController extends Controller
 
     function uploadCompetence(Request $request) {
         $cp = new CompetenceProfile();
-        $cp->uploadCompetence($request);
+        return ($cp->uploadCompetence($request));
+
     }
 
     /**

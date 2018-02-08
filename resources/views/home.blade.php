@@ -28,7 +28,7 @@
     @endif
 
     @if(Auth::guest())
-        <p style="font-size: 50px;">You must log in to see the content! hahahahwudhauwfe! Filip hälsar också!</p>
+        <p style="font-size: 50px;">You must log in to see the content!</p>
     @endif  
   </div>  
 </div>
