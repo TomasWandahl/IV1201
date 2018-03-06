@@ -2,7 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="<?php echo asset('css/customcss.css')?>" type="text/css"> 
-<div class="container">
+<div class="container" style="height: 100%; padding-top: 200px;">
   <div class="container-content">
   @if(Auth::check())
   @if(isset($uploadresult))
@@ -26,9 +26,11 @@
   <form action="uploadCompetenceProfile" method="get">
         <div>
         <strong><p> Select a competence</p></strong>
-        <input type="radio" name="comp" value="male"> Male<br>
-        <input type="radio" name="comp" value="female"> Female<br>
-        <input type="radio" name="comp" value="other"> Other
+        <input type="radio" name="comp" value="Korvgrillning">Korvgrillnig<br>
+        <input type="radio" name="comp" value="Karuselldrift">Karuselldrift<br>
+        <input type="radio" name="comp" value="Cirkusdeltagande">Cirkusdeltagande<br>
+        <input type="radio" name="comp" value="Barnarov">Barnarov<br>
+
         <br>
           <label for="say"><strong>How many years of experience do you have?</strong></label>
           <input name = "yearsOfExp" type="text" style ="width: 400px;padding: 12px 20px;margin: 8px 0;box-sizing: border-box;">

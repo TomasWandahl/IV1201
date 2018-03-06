@@ -3,9 +3,8 @@
 body {
     margin: 0;
     padding: 0;
-    background: rgb(241, 241, 241);
+    background: green;
     font-family: 'Raleway';
-    overflow: hidden;
 }
 
 .navbar img {

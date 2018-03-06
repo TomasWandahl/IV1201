@@ -16,8 +16,7 @@ class CreateCompetenceprofilesTable extends Migration
         Schema::create('competenceprofiles', function (Blueprint $table) {
             $table->integer('yearsOfExperience');
             $table->string('competenceDesc');
-            $table->increments('createdAt');
-            $table->increments('updatedAt');
+            $table->nullableTimestamps();
             $table->integer('userid');
             $table->string('competence');
             $table->string('username');

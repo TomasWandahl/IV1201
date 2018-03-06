@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+@if(isset($applications))
 @foreach($applications as $application)
 <div class="card" style="width: 18rem;border:2px solid black;padding:20px;">
   <a href="viewApplication?id={{$application->userid}}" style="text-decoration: none; color:black;">
@@ -18,6 +19,7 @@
   
   <br>
 @endforeach
-{{ $applications->links() }}
+
+@endif
 </div>
 @endsection

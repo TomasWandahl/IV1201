@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="<?php echo asset('css/customcss.css')?>" type="text/css"> 
 </head>
-<body>
+<body style="overflow: scroll;">
     <div class="navbar">
         <li><img src="http://dogecoin.com/imgs/doge.png" alt=""></li>
         <li><a href="/globalproject/public">This is such application, much global</a></li>
@@ -16,6 +16,7 @@
                 <li><a href="viewApplications">View Competencies (for admins)</a></li>
                 <li><a href="search">Search Competence (for admins)</a></li>
             @endif
+            <li class="li-right"><a href="logout">logout</a></li>
         <li class="li-right">You are logged in</li>
         @endif
         @if(Auth::guest())

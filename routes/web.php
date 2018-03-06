@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('logout', function(){
+    Auth::logout();
+    return view('notification', ['notification' => "pleas log in!"]);
+});
+Route::get('/searchForApplication', 'CompetenceController@getApplication');
+
 Route::get('/', 'CompetenceController@getCompetenciesByUserId');
 
 Route::get('/search', function () {
@@ -30,7 +36,7 @@ Route::get('/search', function () {
 
 Route::get('/viewApplications', 'CompetenceController@getApplications');
 
-Route::get('/viewApplication', 'CompetenceController@getApplication');
+Route::get('/viewApplication', 'CompetenceController@getApplicationById');
 
 
 //redirects all /upload-routes to the HomeController, function = upload

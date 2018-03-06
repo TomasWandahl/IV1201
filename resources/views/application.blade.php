@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 700px;padding-bottom: 200px;">
 @if(isset($userCompetencies))
 <h1> Selected competencies for {{$applicantName}} </h1>
   @foreach($userCompetencies as $competence)
