@@ -8,14 +8,45 @@ use Illuminate\Http\Request;
 
 class CompetenceProfile extends Model
 {
+
+    function getCompetencies() {
+        //paginate kommer returnera resultaten 1000 i taget, och skapa nya pages om resultatet överstiger 1000
+        $competencies = CompetenceProfile::paginate(1000);
+        return view('viewComp', ['competencies' => $competencies]);
+    }
+
+    
+    
+    function getCompetenceByUserIdResult($userid) {
+        $userCompetencies = CompetenceProfile::where('userid', $userid)->get();
+        return view('application', ['userCompetencies' => $userCompetencies, 'applicantName' => $userCompetencies->first()->username]);
+    }
+
+    function getCompetenceByUserId($userid) {
+        $userCompetencies = CompetenceProfile::where('userid', $userid)->get();
+        return view('home', ['userCompetencies' => $userCompetencies,]);
+    }
+
+    function updateCompetence(Request $request){
+
+    }
+
+    function deleteCompetencies() {
+        $office = CompetenceProfile::where('userid', Auth::user()->id);
+        $office->delete();
+        $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
+        return view('home', ['userCompetencies' => $userCompetencies, 'result' => "Competencies sucessfully deleted"]);
+    }
+
     function uploadCompetence(Request $request) {
         try{
+            // Lägger upp data på databasen
             $cp = new CompetenceProfile;
-            $cp -> id = $request->user()->id;
+            $cp -> username = Auth::user()->name;
+            $cp -> userid = Auth::user()->id;
+            $cp -> competence = $request->input("comp");
             $cp -> yearsOfExperience = $request->input("yearsOfExp");
             $cp -> competenceDesc = $request->input("compDesc");
-            $cp -> availableFrom = date(($request->input("from")));
-            $cp -> availableTo = date(($request->input("to")));
             $cp -> save();
          }
          catch(\Exception $e){
@@ -23,7 +54,8 @@ class CompetenceProfile extends Model
             return view('result', ['result' => "Something went wrong while trying to upload your competence profile!"]);
          } 
 
-         return view('result', ['result' => "Competence profile successfully uploaded!"]);
+         $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
+        return view('home', ['userCompetencies' => $userCompetencies,'result' => "Competencies sucessfully uploaded"]);
 
     }
 

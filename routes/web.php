@@ -11,13 +11,28 @@
 |
 */
 
+
 Route::get('/', function () {
+    if(Auth::check()){
+        
+    }
     return view('home');
 });
 
-Route::get('/blabb', function () {
-    return view('uploader');
+Route::get('/', 'CompetenceController@getCompetenciesByUserId');
+
+Route::get('/search', function () {
+    if(Auth::user()->role == 'admin'){
+        return view('search');
+    } else return view('home');
+    
 });
+
+Route::get('/viewApplications', 'CompetenceController@getApplications');
+
+Route::get('/viewApplication', 'CompetenceController@getApplication');
+
+
 //redirects all /upload-routes to the HomeController, function = upload
 Route::get('/upload', 'HomeController@upload');
 //redirects all /add-routes to the HomeController, function = add

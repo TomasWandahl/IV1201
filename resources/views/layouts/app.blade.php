@@ -12,7 +12,10 @@
         <li><img src="http://dogecoin.com/imgs/doge.png" alt=""></li>
         <li><a href="/globalproject/public">This is such application, much global</a></li>
         @if(Auth::check())
-        <li><a href="blabb">Upload Competence</a></li>
+            @if(Auth::user()->role == 'admin')
+                <li><a href="viewApplications">View Competencies (for admins)</a></li>
+                <li><a href="search">Search Competence (for admins)</a></li>
+            @endif
         <li class="li-right">You are logged in</li>
         @endif
         @if(Auth::guest())
