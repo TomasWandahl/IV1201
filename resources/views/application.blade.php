@@ -10,7 +10,6 @@
     <h4>{{$competence->competenceDesc}}</h4>
     <h4>{{$competence->yearsOfExperience}} years experience</h4>
     <br>
-
   @endforeach
   @endif
 </div>

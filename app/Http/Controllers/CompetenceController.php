@@ -44,14 +44,7 @@ class CompetenceController extends Controller
             break;
             case "date":
                 $dateAction = $request->input('dateAction');
-                switch(ucfirst($dateAction)){
-                    case "To":
-                        return($ap->getApplicationByDate($request->input('date'), $dateAction));
-                    break;
-                    case "From":
-                        return($ap->getApplicationByDate($request->input('date'), $dateAction));
-                    break;
-                }
+                return($ap->getApplicationByDate($request->input('date'), $dateAction));
                 
             break;
         }

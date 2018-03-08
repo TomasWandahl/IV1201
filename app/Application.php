@@ -34,8 +34,7 @@ class Application extends Model
         
 
         $applications = Application::whereRaw($queri)->get();
-        return view('viewComp', ['applications' => $applications]);
-
+            return view('viewComp', ['applications' => $applications]);
         }
     }
 

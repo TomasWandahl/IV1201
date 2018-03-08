@@ -31,7 +31,6 @@ Route::get('/search', function () {
     if(Auth::user()->role == 'admin'){
         return view('search');
     } else return view('home');
-    
 });
 
 Route::get('/viewApplications', 'CompetenceController@getApplications');

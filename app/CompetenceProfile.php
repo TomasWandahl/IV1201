@@ -7,10 +7,12 @@ class CompetenceProfile extends Model
 {
     function getCompetencies() {
         //paginate kommer returnera resultaten 1000 i taget, och skapa nya pages om resultatet överstiger 1000
-        $competencies = CompetenceProfile::paginate(1000);
+        $competencies = CompetenceProfile::paginate(2);
         return view('viewComp', ['competencies' => $competencies]);
     }
     
+    // Få ihop Applikation och Kompetenser i en VY
+
     
     function getCompetenceByUserIdResult($userid) {
         $userCompetencies = CompetenceProfile::where('userid', $userid)->get();
