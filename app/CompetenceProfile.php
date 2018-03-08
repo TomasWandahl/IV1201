@@ -1,39 +1,57 @@
-<?php
+ <?php
 namespace App;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 class CompetenceProfile extends Model
 {
+    // The Method getCompetencies returns a view consisting of all Competence-records in the database
     function getCompetencies() {
         //paginate kommer returnera resultaten 1000 i taget, och skapa nya pages om resultatet överstiger 1000
         $competencies = CompetenceProfile::paginate(2);
         return view('viewComp', ['competencies' => $competencies]);
     }
-    
-    // Få ihop Applikation och Kompetenser i en VY
 
-    
     function getCompetenceByUserIdResult($userid) {
         $userCompetencies = CompetenceProfile::where('userid', $userid)->get();
         return view('application', ['userCompetencies' => $userCompetencies, 'applicantName' => $userCompetencies->first()->username]);
     }
+
+    // The Method getUsernamesByCompetence($competence) takes in an competence which it uses in order to query
+    // the database for records which corresponds with the inputed competence.
+    // Returns a list of all records of the correct competence.
     function getUsernamesByCompetence($competence) {
         $userCompetencies = CompetenceProfile::where('competence', $competence)->get();
         return $userCompetencies;
     }
+    // The Method getCompetencesListbyUserId($userid) takes in an user-id that it uses in an query to
+    // the database in order to retrieve all database records of competencies associated to that userid.
+    // Returns a view consisting of the retrieved competencies.
     function getCompetenceByUserId($userid) {
         $userCompetencies = CompetenceProfile::where('userid', $userid)->get();
         return view('home', ['userCompetencies' => $userCompetencies,]);
     }
-    function updateCompetence(Request $request){
+
+    // The Method getCompetencesListbyUserId($userid) takes in an user-id that it uses in an query to
+    // the database in order to retrieve all database records of competencies associated to that userid.
+    // Returns a list of competencies.
+    function getCompetenceListByUserId($userid){
+        $userCompetencies = CompetenceProfile::where('userid', $userid)->get();
+        return $userCompetencies;
     }
+
+    // The Method deleteCompetencies deletes all competencis associated with the currently logged in user.
+    // Returns a view with a notification.
     function deleteCompetencies() {
         $office = CompetenceProfile::where('userid', Auth::user()->id);
         $office->delete();
         $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
         return view('home', ['userCompetencies' => $userCompetencies, 'result' => "Competencies sucessfully deleted"]);
     }
+
+    // The Method uploadCompetence($erquest) takes in a HTTP-request and extracts data which it attempts to
+    // upload to the database. The method returns a view with an appropriate notification-message
+    // depending on the result of the database-upload.
     function uploadCompetence(Request $request) {
         try{
             // Lägger upp data på databasen
@@ -46,8 +64,7 @@ class CompetenceProfile extends Model
             $cp -> save();
          }
          catch(\Exception $e){
-             return $e;
-            return view('result', ['result' => "Something went wrong while trying to upload your competence profile!"]);
+            return view('notification', ['notification' => "Something went wrong while trying to upload your competence profile!"]);
          } 
          $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
         return view('home', ['userCompetencies' => $userCompetencies,'result' => "Competencies sucessfully uploaded"]);

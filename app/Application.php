@@ -42,13 +42,20 @@ class Application extends Model
         Application::where('userid', Auth::user()->id)->delete();
     }
     function submitApplication(Request $request) {
-        $app = new Application;
-        $app -> username = Auth::user()->name;
-        $app -> availableFrom = $request->input('from');
-        $app -> availableTo = $request->input('to');
-        $app -> userid = Auth::user()->id;
-        $app -> save();
-        return view('home', ['uploadresult' => "Competencies sucessfully deleted"]);
+
+        try{
+            $app = new Application;
+            $app -> username = Auth::user()->name;
+            $app -> availableFrom = $request->input('from');
+            $app -> availableTo = $request->input('to');
+            $app -> userid = Auth::user()->id;
+            $app -> save();
+         }
+         catch(\Exception $e){
+            return view('notification', ['notification' => "Something went wrong while trying to submit your application!"]);
+         } 
+        
+        return view('home', ['uploadresult' => "Appplication sucessfully uploaded"]);
     }
 
     function getApplications() {
