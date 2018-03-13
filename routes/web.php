@@ -46,7 +46,7 @@ Route::get('/add', 'HomeController@add');
 Route::get('/uploadCompetenceProfile', 'CompetenceController@uploadCompetence');
 
 Route::get('/check', function(){
-        return "You are logged in!";
+        return "You are     logged in!";
 })->middleware('auth');
 
 

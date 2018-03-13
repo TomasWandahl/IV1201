@@ -42,18 +42,19 @@ class Application extends Model
         Application::where('userid', Auth::user()->id)->delete();
     }
     function submitApplication(Request $request) {
-
-        try{
+        DB::beginTransaction();
+        try {
             $app = new Application;
             $app -> username = Auth::user()->name;
             $app -> availableFrom = $request->input('from');
             $app -> availableTo = $request->input('to');
             $app -> userid = Auth::user()->id;
             $app -> save();
-         }
-         catch(\Exception $e){
-            return view('notification', ['notification' => "Something went wrong while trying to submit your application!"]);
-         } 
+        } catch(\Exception $e) {
+            DB::rollBack();
+            return view('home', ['errorResult' => "Application could not be uploaded successfully"]);
+        }
+            
         
         return view('home', ['uploadresult' => "Appplication sucessfully uploaded"]);
     }

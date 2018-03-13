@@ -4,6 +4,7 @@ namespace App;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class CompetenceProfile extends Model
 {
     // The Method getCompetencies returns a view consisting of all Competence-records in the database
@@ -54,20 +55,23 @@ class CompetenceProfile extends Model
     // upload to the database. The method returns a view with an appropriate notification-message
     // depending on the result of the database-upload.
     function uploadCompetence(Request $request) {
-        try{
-            // Lägger upp data på databasen
-            $cp = new CompetenceProfile;
-            $cp -> username = Auth::user()->name;
-            $cp -> userid = Auth::user()->id;
-            $cp -> competence = $request->input("comp");
-            $cp -> yearsOfExperience = $request->input("yearsOfExp");
-            $cp -> competenceDesc = $request->input("compDesc");
-            $cp -> save();
-         }
-         catch(\Exception $e){
-            return view('notification', ['notification' => "Something went wrong while trying to upload your competence profile!"]);
-         } 
-         $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
+        $cp = new CompetenceProfile;
+        $cp -> username = Auth::user()->name;
+        $cp -> userid = Auth::user()->id;
+        $cp -> competence = $request->input("comp");
+        $cp -> yearsOfExperience = $request->input("yearsOfExp");
+        $cp -> competenceDesc = $request->input("compDesc");
+
+        DB::transaction(function() use ($cp){
+            try{
+                $cp-save();
+            } catch(Exception $e){
+                return view('home', ['uploadresult' => "Something went wrong while trying to upload your competence."]);
+            }
+        }, 5);
+
+
+        $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
         return view('home', ['userCompetencies' => $userCompetencies,'result' => "Competencies sucessfully uploaded"]);
     }
     protected $table = 'competenceprofiles';

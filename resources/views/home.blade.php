@@ -11,6 +11,9 @@
                     @if(isset($result))
                         <h1 style="color: green; font-weight: bold; font-size: 50px;">{{$result}}</h1>
                     @endif
+                    @if(isset($errorResult))
+                        <h1 style="color: red; font-weight: bold; font-size: 50px;">{{$errorResult}}</h1>
+                    @endif
                     <h1>{{Auth::user()->name}} current competence profile consists of:</h1>
                     @if(isset($userCompetencies))
                         @foreach($userCompetencies as $competence)
