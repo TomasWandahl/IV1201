@@ -10,9 +10,7 @@ var shell = require('gulp-shell');
 
 gulp.task('default', ['composer', 'npm', 'copy-env', 'migrate-database','generate-key', 'php-server']);
 
-gulp.task('composer', function(){
-    composer();
-});
+gulp.task('composer', function(){ composer(); });
 gulp.task('copy-env', shell.task('cp .env.example .env'));
 gulp.task('migrate-database', shell.task('php artisan migrate'));
 gulp.task('generate-key', shell.task('php artisan key:generate'));

@@ -47,32 +47,36 @@ class CompetenceProfile extends Model
     function deleteCompetencies() {
         $office = CompetenceProfile::where('userid', Auth::user()->id);
         $office->delete();
-        $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
         return view('home', ['userCompetencies' => $userCompetencies, 'result' => "Competencies sucessfully deleted"]);
     }
-
+    
     // The Method uploadCompetence($erquest) takes in a HTTP-request and extracts data which it attempts to
     // upload to the database. The method returns a view with an appropriate notification-message
     // depending on the result of the database-upload.
     function uploadCompetence(Request $request) {
         $cp = new CompetenceProfile;
-        $cp -> username = Auth::user()->name;
-        $cp -> userid = Auth::user()->id;
-        $cp -> competence = $request->input("comp");
-        $cp -> yearsOfExperience = $request->input("yearsOfExp");
-        $cp -> competenceDesc = $request->input("compDesc");
-
-        DB::transaction(function() use ($cp){
-            try{
-                $cp-save();
-            } catch(Exception $e){
-                return view('home', ['uploadresult' => "Something went wrong while trying to upload your competence."]);
-            }
-        }, 5);
-
-
         $userCompetencies = CompetenceProfile::where('userid', Auth::user()->id)->get();
-        return view('home', ['userCompetencies' => $userCompetencies,'result' => "Competencies sucessfully uploaded"]);
+
+        if(is_numeric($request->input('yearsOfExp'))){
+            $cp -> username = Auth::user()->name;
+            $cp -> userid = Auth::user()->id;
+            $cp -> competence = $request->input("comp");
+            $cp -> yearsOfExperience = $request->input("yearsOfExp");
+            $cp -> competenceDesc = $request->input("compDesc");
+            DB::transaction(function() use ($cp){
+                try{
+                    $cp->save();
+                } catch(Exception $e){
+                    return view('home', ['uploadresult' => "Something went wrong while trying to upload your competence, please try again!"]);
+                }
+            });
+            return view('home', ['userCompetencies' => $userCompetencies,'result' => "Competencies sucessfully uploaded"]);
+        } else {
+            return view('home', ['userCompetencies' => $userCompetencies,'result' => "Stated years of experience must be an numeric value!"]);
+        }
+
+        
     }
+
     protected $table = 'competenceprofiles';
 }

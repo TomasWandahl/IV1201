@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('logout', function(){
     Auth::logout();
-    return view('notification', ['notification' => "pleas log in!"]);
+    return view('notification', ['notification' => "please log in!"]);
 });
 Route::get('/searchForApplication', 'CompetenceController@getApplication');
 
@@ -35,6 +35,7 @@ Route::get('/search', function () {
 
 Route::get('/viewApplications', 'CompetenceController@getApplications');
 
+
 Route::get('/viewApplication', 'CompetenceController@getApplicationById');
 
 
@@ -46,7 +47,7 @@ Route::get('/add', 'HomeController@add');
 Route::get('/uploadCompetenceProfile', 'CompetenceController@uploadCompetence');
 
 Route::get('/check', function(){
-        return "You are     logged in!";
+        return "You are logged in!";
 })->middleware('auth');
 
 

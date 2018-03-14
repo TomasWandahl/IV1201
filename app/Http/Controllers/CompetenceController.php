@@ -79,15 +79,22 @@ class CompetenceController extends Controller
             case "add":
                 if($request->input('comp') === null || $request->input("yearsOfExp") === null || $request->input("compDesc") === null) {
                     return view('home', ['userCompetencies' => ($cp -> getCompetenceListByUserId(Auth::user()->id)),'result' => "Please fill in all fields"]);
+                } else {
+                    return($cp->uploadCompetence($request));
                 }
-                return($cp->uploadCompetence($request));
+                
             break;
             case "delete":
                 $ap -> deleteApplication();
                 return($cp->deleteCompetencies());
             break;
             case "upload":
-                return($ap->submitApplication($request));
+                if($request->input('to') === null || $request->input('from') === null){
+                    return view('home', ['userCompetencies' => ($cp -> getCompetenceListByUserId(Auth::user()->id)),'result' => "Please specify between what dates you are available!"]);
+                } else {
+                    return($ap->submitApplication($request));
+                }
+                
             break;
         }
 

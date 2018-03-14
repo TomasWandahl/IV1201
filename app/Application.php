@@ -43,6 +43,7 @@ class Application extends Model
     }
     function submitApplication(Request $request) {
         DB::beginTransaction();
+       
         try {
             $app = new Application;
             $app -> username = Auth::user()->name;

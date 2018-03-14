@@ -14,12 +14,14 @@ class CreateCompetenceprofilesTable extends Migration
     public function up()
     {
         Schema::create('competenceprofiles', function (Blueprint $table) {
+            $table->increments('competenceid');
             $table->integer('yearsOfExperience');
             $table->string('competenceDesc');
             $table->nullableTimestamps();
             $table->integer('userid');
             $table->string('competence');
             $table->string('username');
+            $table->primary('competenceid'); 
         });
     }
 

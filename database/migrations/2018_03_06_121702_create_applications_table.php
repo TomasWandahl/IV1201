@@ -17,6 +17,7 @@ class CreateApplicationsTable extends Migration
             $table->integer('userid')->unique();
             $table->string('username');
             $table->timestamp('createdAt');
+            $table->primary('userid');
         });
     }
 
