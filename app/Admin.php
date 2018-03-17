@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class admin extends Model
 {
+	
     function uploadUserrole($userid) {
         try{
             $ur = new admin;
@@ -19,7 +20,7 @@ class admin extends Model
 
 
     }
-
+	
     protected $table = 'admins';
 }
 

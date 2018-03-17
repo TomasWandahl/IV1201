@@ -41,6 +41,7 @@ class Application extends Model
     function deleteApplication() {
         Application::where('userid', Auth::user()->id)->delete();
     }
+	
     function submitApplication(Request $request) {
         DB::beginTransaction();
        
@@ -71,14 +72,6 @@ class Application extends Model
         $application = Application::whereRaw($rawQuery)->get();
         return view('result', ['application' => $application]);
     }
-
-    
-
-    
-
-    
-
-    
 
     protected $table = 'applications';
 }

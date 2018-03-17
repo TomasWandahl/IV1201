@@ -9,7 +9,7 @@ class CompetenceProfile extends Model
 {
     // The Method getCompetencies returns a view consisting of all Competence-records in the database
     function getCompetencies() {
-        //paginate kommer returnera resultaten 1000 i taget, och skapa nya pages om resultatet överstiger 1000
+		//paginate will return the result 1000 at a time, and create new pages if the result exceeds 1000
         $competencies = CompetenceProfile::paginate(2);
         return view('viewComp', ['competencies' => $competencies]);
     }
@@ -26,6 +26,7 @@ class CompetenceProfile extends Model
         $userCompetencies = CompetenceProfile::where('competence', $competence)->get();
         return $userCompetencies;
     }
+	
     // The Method getCompetencesListbyUserId($userid) takes in an user-id that it uses in an query to
     // the database in order to retrieve all database records of competencies associated to that userid.
     // Returns a view consisting of the retrieved competencies.
@@ -74,8 +75,7 @@ class CompetenceProfile extends Model
         } else {
             return view('home', ['userCompetencies' => $userCompetencies,'result' => "Stated years of experience must be an numeric value!"]);
         }
-
-        
+		
     }
 
     protected $table = 'competenceprofiles';

@@ -22,7 +22,7 @@ class CompetenceController extends Controller
     }
 
     // The method getCompetenciesByUserId reads the session-value id in order to redirect it to the appropriate
-    // Model which returns a list of competencies associated with that specific user-id.
+    // model which returns a list of competencies associated with that specific user-id.
     function getCompetenciesByUserId(){
         if(Auth::check()){
             $cp = new CompetenceProfile();
@@ -31,8 +31,8 @@ class CompetenceController extends Controller
         
     }
 
-    // The Method getApplication($request) takes in a HTTP-request and reads the value to call the appropriate
-    // Method in the appropriate Model. Returns a view.
+    // The method getApplication($request) takes a HTTP-request and reads the value to call the appropriate
+    // method in the appropriate Model. Returns a view.
     function getApplication(Request $request){
         $action = $request->input("action");
         $ap = new Application();
@@ -63,13 +63,12 @@ class CompetenceController extends Controller
                     return view('search', ['notification' => 'You must choose to/from and specify a date!']);
                 }
                 
-                
             break;
         }
     }
 
-    // The Method uploadComptence($reqest) takes in a HTTP-request that it reads in order to redirect the request
-    // to the appropriate Method in the appropriate Model. The result is that competencies is added or deleted
+    // The Method uploadComptence($reqest) takes a HTTP-request that it reads in order to redirect the request
+    // to the appropriate method in the appropriate Model. The result is that competencies are added or deleted
     // from the database and/or an application is added to the database. The return value is a view.
     function uploadCompetence(Request $request) {
         $cp = new CompetenceProfile();
@@ -98,20 +97,19 @@ class CompetenceController extends Controller
             break;
         }
 
-
         $cp = new CompetenceProfile();
         return ($cp->uploadCompetence($request));
 
     }
 
-    // The method GetApplications calls the Application-model and returns a list of all Applications currently
+    // The method getApplications calls the Application-model and returns a list of all Applications currently
     // in the database.
     function getApplications() {
         $ap = new Application();
         return ($ap->getApplications());
     }
 
-    // the Method getApplicationById($request) takes in a HTTP-request in order to return a specific application
+    // The method getApplicationById($request) takes in a HTTP-request in order to return a specific application
     // that is associated with the input-field 'id' in the request. Returns a view with the result of the search
     // attached to it.
     function getApplicationById(Request $request) {
@@ -119,7 +117,7 @@ class CompetenceController extends Controller
         return ($cp->getCompetenceByUserIdResult($request->input('id')));
     }
 
-    // The Method getCompetencies calls the CompetenceProfile-modell in order to retrieve a list of all 
+    // The method getCompetencies calls the CompetenceProfile-model in order to retrieve a list of all 
     // Competencies currently in the database.
     function getCompetencies(){
         $cp = new CompetenceProfile();
