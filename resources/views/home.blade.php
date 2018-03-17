@@ -31,9 +31,7 @@
                             <input type="radio" name="comp" value="Korvgrillning">Korvgrillnig<br>
                             <input type="radio" name="comp" value="Karuselldrift">Karuselldrift<br>
                             <input type="radio" name="comp" value="Cirkusdeltagande">Cirkusdeltagande<br>
-                            <input type="radio" name="comp" value="Barnarov">Barnarov<br>
-
-                            
+                            <input type="radio" name="comp" value="Barnarov">Barnarov<br>                           
                             <br>
                             <label for="say"><strong>How many years of experience do you have?</strong></label>
                             <input name = "yearsOfExp" type="text" style ="width: 400px;padding: 12px 20px;margin: 8px 0;box-sizing: border-box;">
@@ -57,7 +55,6 @@
                         </div>
                     </form>               
                 @endif
-
                 @if(Auth::guest())
                     <p style="font-size: 50px;">You must log in to see the content!</p>
                 @endif 
